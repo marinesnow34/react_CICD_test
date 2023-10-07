@@ -21,7 +21,9 @@ jobs:                                # Job 설정
         
       - name: Deploy                  # Upload build file to S3
         run: |
-          sudo yum remove awscli
           curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
           unzip awscliv2.zip
           sudo ./aws/install
+      - name: AWS Version
+        run: |
+          aws --version
