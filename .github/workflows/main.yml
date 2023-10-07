@@ -30,4 +30,4 @@ jobs:                                # Job 설정
           aws s3 cp \
             --recursive \
             --region us-east-1 \
-            build https://29c6e4b55b1ddb8d2b6e69df21141caa.r2.cloudflarestorage.com/ci-cd # 자신의 레포지토리로 변경해주세요.
+            build --endpoint-url https://29c6e4b55b1ddb8d2b6e69df21141caa.r2.cloudflarestorage.com/ci-cd # 자신의 레포지토리로 변경해주세요.
