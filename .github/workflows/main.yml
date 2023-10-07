@@ -13,14 +13,6 @@ jobs:                                # Job 설정
       - name: AWS Version
         run: |
           aws --version      
-      - name: AWS configure
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: 'us-east-1'
-
-        run: |
-          aws s3 ls --endpoint-url https://29c6e4b55b1ddb8d2b6e69df21141caa.r2.cloudflarestorage.com/ci-cd
           
       - name: Check Node v            # Node v 확인
         run: node -v
@@ -34,9 +26,10 @@ jobs:                                # Job 설정
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: 'us-east-1'
+
         run: |
-          aws s3api list-buckets --endpoint-url https://29c6e4b55b1ddb8d2b6e69df21141caa.r2.cloudflarestorage.com/ci-cd \
-            --region us-east-1
+          aws s3api list-buckets --endpoint-url https://29c6e4b55b1ddb8d2b6e69df21141caa.r2.cloudflarestorage.com/ci-cd
       - name: Sync Bucket
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -45,4 +38,3 @@ jobs:                                # Job 설정
           aws s3 cp build s3://ci-cd \
             --endpoint-url https://29c6e4b55b1ddb8d2b6e69df21141caa.r2.cloudflarestorage.com/ci-cd \
             --recursive \
-            --region us-east-1
