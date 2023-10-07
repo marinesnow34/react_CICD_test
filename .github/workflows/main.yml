@@ -13,6 +13,13 @@ jobs:                                # Job 설정
       - name: AWS Version
         run: |
           aws --version      
+      - name: AWS configure
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws configure
+          
       - name: Check Node v            # Node v 확인
         run: node -v
         
