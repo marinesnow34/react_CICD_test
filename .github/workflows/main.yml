@@ -29,7 +29,7 @@ jobs:                                # Job 설정
       #   run: npm run build
       - name: Bucket list
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_ACCESS_KEY_ID: test #${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-east-1
 
@@ -39,9 +39,8 @@ jobs:                                # Job 설정
         uses: 8398a7/action-slack@v3.15.1
         with:
           status: ${{ job.status }}
-          author_name: Github Action Test # default: 8398a7@action-slack
+          author_name: React CI
           fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
-          
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_URL }}
         if: always()
