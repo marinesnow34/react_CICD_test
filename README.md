@@ -1,4 +1,4 @@
-# react CI/CD test
+# react CI/CD
 환경: github codespaces, github actions, cloudflare r2
 
 # GitHub Codespaces ♥️ React
