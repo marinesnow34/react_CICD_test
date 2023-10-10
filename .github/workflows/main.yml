@@ -40,9 +40,9 @@ jobs:                                # Job 설정
       
       - name: Discord notification
         uses: Ilshidur/action-discord@master
-        with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          embeds: ${{ env.json_data }}
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_EMBEDS: ${{ env.json_data }}
         if: always()
 
 
