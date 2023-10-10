@@ -26,11 +26,17 @@ jobs:                                # Job 설정
 
       #   run: |
       #     aws s3api list-buckets --endpoint-url https://29c6e4b55b1ddb8d2b6e69df21141caa.r2.cloudflarestorage.com/ci-cd
+      - name: Convert Discord variables to JSON
+        id: json_converter
+        run: |
+          echo "::set-output name=json_data::{\"project\":\"${{ github.repository }}\",\"repo\":\"${{ github.repository }}\",\"message\":\"${{ github.event.head_commit.message }}\",\"commit\":\"${{ github.sha }}\",\"author\":\"${{ github.actor }}\",\"action\":\"${{ github.action }}\",\"eventName\":\"${{ github.event_name }}\",\"ref\":\"${{ github.ref }}\",\"workflow\":\"${{ github.workflow }}\",\"job\":\"${{ github.job }}\",\"took\":\"(You'll need another step to calculate this)\"}"
+
+
       - name: discord
         uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: ${{ toJson(github.action),toJSON(github.sha) }}
+          DISCORD_EMBEDS: ${{ steps.json_converter.outputs.json_data }}
           
         # with:
         #   args: >
