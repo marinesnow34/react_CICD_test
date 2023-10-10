@@ -18,24 +18,24 @@ jobs:                                # Job 설정
       
       # - name: Generate build          # React Build
       #   run: npm run build
-      - name: Bucket list
+      # - name: Bucket list
       #   env:
       #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       #     AWS_DEFAULT_REGION: us-east-1
 
-        run: |
-          aws s3api list-buckets --endpoint-url https://29c6e4b55b1ddb8d2b6e69df21141caa.r2.cloudflarestorage.com/ci-cd
+        # run: |
+        #   aws s3api list-buckets --endpoint-url https://29c6e4b55b1ddb8d2b6e69df21141caa.r2.cloudflarestorage.com/ci-cd
       - name: Fail - Convert Discord variables to JSON
         id: json_converter_fail
         run: |
-          echo "json_data=[{\"title\": \":red_circle:빌드 실패:exclamation::exclamation::exclamation:\", \"description\": \"빌드 실패\n- Repo: [${{ github.repository }}](https://github.com/${{ github.repository }})\n- Message: ${{ github.event.head_commit.message }}\n- Commit: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{github.sha}})\n- Author: ${{ github.actor }}\n- Action: [action](https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks?check_run_id=${{ github.run_id }}) \n- Ref: ${{ github.ref }}\n- Workflow: ${{ github.workflow }}\n- Took: (You'll need another step to calculate this)\"}]" >> $GITHUB_ENV
+          echo "json_data=[{\"title\": \":red_circle:빌드 실패:exclamation::exclamation::exclamation:\", \"color\": 2317660,\"description\": \"빌드 실패\n- Repo: [${{ github.repository }}](https://github.com/${{ github.repository }})\n- Message: ${{ github.event.head_commit.message }}\n- Commit: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{github.sha}})\n- Author: ${{ github.actor }}\n- Action: [action](https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks?check_run_id=${{ github.run_id }}) \n- Ref: ${{ github.ref }}\n- Workflow: ${{ github.workflow }}\n\"}]" >> $GITHUB_ENV
         if: failure()
       
       - name: Success - Convert Discord variables to JSON
         id: json_converter_success
         run: |
-          echo "json_data=[{\"title\": \":white_check_mark:빌드 성공:exclamation::exclamation::exclamation:\", \"description\": \"빌드 성공\n- Repo: [${{ github.repository }}](https://github.com/${{ github.repository }})\n- Message: ${{ github.event.head_commit.message }}\n- Commit: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{github.sha}})\n- Author: ${{ github.actor }}\n- Action: [action](https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks?check_run_id=${{ github.run_id }}) \n- Ref: ${{ github.ref }}\n- Workflow: ${{ github.workflow }}\n- Took: (You'll need another step to calculate this)\"}]" >> $GITHUB_ENV
+          echo "json_data=[{\"title\": \":green_circle:빌드 성공\", \"color\": 3917496,\"description\": \"빌드 성공\n- Repo: [${{ github.repository }}](https://github.com/${{ github.repository }})\n- Message: ${{ github.event.head_commit.message }}\n- Commit: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{github.sha}})\n- Author: ${{ github.actor }}\n- Action: [action](https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks?check_run_id=${{ github.run_id }}) \n- Ref: ${{ github.ref }}\n- Workflow: ${{ github.workflow }}\n\"}]" >> $GITHUB_ENV
         if: success()
       
       - name: Discord notification
