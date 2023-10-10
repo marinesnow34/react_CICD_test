@@ -31,7 +31,7 @@ jobs:                                # Job 설정
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
-          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
+          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.\n 테스트 {{repo}}, {{message}}'
         
       # - name: slack
       #   uses: 8398a7/action-slack@v3.15.1
