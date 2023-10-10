@@ -31,8 +31,19 @@ jobs:                                # Job 설정
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
-          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.\n 테스트 {{repo}}, {{message}}'
-        
+          args: >
+            The project ${{ github.repository }} has been deployed.
+            - Repo: ${{ github.repository }}
+            - Message: ${{ github.event.head_commit.message }}
+            - Commit: ${{ github.sha }}
+            - Author: ${{ github.actor }}
+            - Action: ${{ github.action }}
+            - Event Name: ${{ github.event_name }}
+            - Ref: ${{ github.ref }}
+            - Workflow: ${{ github.workflow }}
+            - Job: ${{ github.job }}
+            - Took: (You'll need another step to calculate this)
+              
       # - name: slack
       #   uses: 8398a7/action-slack@v3.15.1
       #   with:
