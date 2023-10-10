@@ -18,14 +18,14 @@ jobs:                                # Job 설정
       
       # - name: Generate build          # React Build
       #   run: npm run build
-      # - name: Bucket list
+      - name: Bucket list
       #   env:
       #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       #     AWS_DEFAULT_REGION: us-east-1
 
-      #   run: |
-      #     aws s3api list-buckets --endpoint-url https://29c6e4b55b1ddb8d2b6e69df21141caa.r2.cloudflarestorage.com/ci-cd
+        run: |
+          aws s3api list-buckets --endpoint-url https://29c6e4b55b1ddb8d2b6e69df21141caa.r2.cloudflarestorage.com/ci-cd
       - name: Convert Discord variables to JSON
         id: json_converter
         run: |
@@ -37,6 +37,7 @@ jobs:                                # Job 설정
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_EMBEDS: ${{ steps.json_converter.outputs.json_data }} 
+        if: always()
           
         # with:
         #   args: >
