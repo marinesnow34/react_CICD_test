@@ -32,16 +32,16 @@ jobs:                                # Job 설정
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
           args: >
-            The project ${{ github.repository }} has been deployed.
-            - Repo: ${{ github.repository }}
-            - Message: ${{ github.event.head_commit.message }}
-            - Commit: ${{ github.sha }}
-            - Author: ${{ github.actor }}
-            - Action: ${{ github.action }}
-            - Event Name: ${{ github.event_name }}
-            - Ref: ${{ github.ref }}
-            - Workflow: ${{ github.workflow }}
-            - Job: ${{ github.job }}
+            The project ${{ github.repository }} has been deployed.\n
+            - Repo: ${{ github.repository }}\n
+            - Message: ${{ github.event.head_commit.message }}\n
+            - Commit: ${{ github.sha }}\n
+            - Author: ${{ github.actor }}\n
+            - Action: ${{ github.action }}\n
+            - Event Name: ${{ github.event_name }}\n
+            - Ref: ${{ github.ref }}\n
+            - Workflow: ${{ github.workflow }}\n
+            - Job: ${{ github.job }}\n
             - Took: (You'll need another step to calculate this)
               
       # - name: slack
