@@ -30,7 +30,7 @@ jobs:                                # Job 설정
         uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          embed: ${{ toJson(github.action) }}
+          DISCORD_EMBEDS: ${{ toJson(github.action,github.sha) }}
           
         # with:
         #   args: >
